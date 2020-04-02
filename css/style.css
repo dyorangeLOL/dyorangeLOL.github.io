@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900");
-
 *
 {
 	margin: 0;
@@ -7,7 +6,8 @@
 	font-family: 'Poppins', sans-serif;
 }
 
-body{
+body
+{
 	background: #000 url(bg.jpg);
 	background-attachment: fixed;
 	background-blend-mode: hard-light;
@@ -19,13 +19,13 @@ body{
 	left: 100px;
 	right: 100px;
 	bottom: 80px;
-	background: #fff;
+	background: url(bg.jpg);
 	background-attachment: fixed;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	box-shadow: 0 50px 50px rgba(0,0,0,0.5)，
+	box-shadow: 0 50px 50px rgba(0,0,0,0.5),
 				0 0 0 100px rgba(0,0,0,.1);
 }
 
