@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>dyorange | 中高考倒计时 </title>
+		<link rel="stylesheet" href="css/style.css">
+	</head>
+	<body>
+		<div class="container">
+			 <h2><span>Countdown to dyorange</span> 2023</h2>
+			 <div class="countdown">
+                                 <div id="dayh">NA</div>
+				 <div id="daym">NA</div>
+				 <div id="hour">NA</div>
+				 <div id="minute">NA</div>
+				 <div id="second">NA</div>
+			 </div>
+		 </div>
+
+	</body>
+</html>
+<script type="text/javascript">
+
+	function getEndTime(myYear){
+		var myEndTime = new Date(''+myYear+'/06/12 00:00:00');
+		return myEndTime;
+	}
+
+	function countDown(){
+		var mydate = new Date();
+		var year = '2023';
+		var EndTime = getEndTime(year);
+		var NowTime = new Date();
+		if( (EndTime.getTime() - NowTime.getTime() ) < 0){
+			year = mydate.getFullYear() + 1;
+			EndTime = getEndTime(year);
+		}
+		var t = EndTime.getTime() - NowTime.getTime();
+
+
+
+		var d1=Math.floor(t/1000/60/60/24-5)
+		var d2=Math.floor(t/1000/60/60/24);
+		var h=Math.floor(t/1000/60/60%24);
+		var m=Math.floor(t/1000/60%60);
+		var s=Math.floor(t/1000%60);
+        
+		document.getElementById('dayh').innerText = d1;
+		document.getElementById('daym').innerText = d2;
+		document.getElementById('hour').innerText = h;
+		document.getElementById('minute').innerText = m;
+		document.getElementById('second').innerText = s;
+	} 
+	setInterval(countDown,1000)
+</script>
