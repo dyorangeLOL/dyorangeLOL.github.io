@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Analytics</title>
+  <title>数据分析</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -14,24 +14,24 @@
   <nav>
   <div>💸 Lily Accounting</div>
   <div>
-    <a href="index.html">Dashboard</a>
-    <a href="add.html">Add Expense</a>
-    <a href="history.html">History</a>
-    <a href="analytics.html">Analytics</a>
-    <a href="settings.html">Settings</a>
+    <a href="index.html">首页</a>
+    <a href="add.html">记一笔</a>
+    <a href="history.html">账单记录</a>
+    <a href="analytics.html">数据分析</a>
+    <a href="settings.html">设置</a>
   </div>
 </nav>
 
-  <h1 class="page-title">📊 Expense Analytics</h1>
+  <h1 class="page-title">📊 Expense 数据分析</h1>
 
   <div class="chart-section">
   <div class="chart-card">
-    <h3>Spending by Category</h3>
+    <h3>分类支出</h3>
     <canvas id="categoryChart"></canvas>
   </div>
 
   <div class="chart-card">
-    <h3>Monthly Spending Trend</h3>
+    <h3>本月支出趋势</h3>
     <canvas id="monthlyChart"></canvas>
   </div>
 </div>
@@ -39,16 +39,16 @@
 <div class="total-spent" id="total-spent"></div>
 
 <div class="download-section">
-  <button onclick="downloadMonthlyJSON()" class="animated-btn">⬇️ Download Monthly JSON</button>
+  <button onclick="downloadMonthlyJSON()" class="animated-btn">⬇️ 导出本月账单 JSON</button>
 </div>
 
-<footer class="footer">© Made by Siddhesh Jadhav - Lily Accounting</footer>
+<footer class="footer">© Lily Accounting</footer>
 <script>
   function getExpenses() {
     return JSON.parse(localStorage.getItem("expenses")) || [];
   }
 
-  function loadAnalytics() {
+  function load数据分析() {
     const expenses = getExpenses();
     const currentMonth = new Date().getMonth();
     const monthlyExpenses = expenses.filter(exp => new Date(exp.date).getMonth() === currentMonth);
@@ -80,7 +80,7 @@
       data: {
         labels: Object.keys(dailyTotals),
         datasets: [{
-          label: 'Daily Spending',
+          label: '每日支出',
           data: Object.values(dailyTotals),
           borderColor: '#4a90e2',
           backgroundColor: 'rgba(74,144,226,0.2)',
@@ -90,7 +90,7 @@
       }
     });
 
-    document.getElementById('total-spent').innerText = `🧾 Total Spent This Month: ₹${total}`;
+    document.getElementById('total-spent').innerText = `🧾 本月总支出：₹${total}`;
   }
 
   function downloadMonthlyJSON() {
@@ -102,10 +102,10 @@
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'monthly-expenses.json';
+    a.download = '本月账单.json';
     a.click();
     URL.revokeObjectURL(url);
   }
 
-  document.addEventListener('DOMContentLoaded', loadAnalytics);
+  document.addEventListener('DOMContentLoaded', load数据分析);
 </script>
