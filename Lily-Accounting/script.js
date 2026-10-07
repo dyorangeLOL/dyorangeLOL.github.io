@@ -10,12 +10,12 @@ function applyTheme() {
 }
 function showBudget() {
   const settings = JSON.parse(localStorage.getItem("settings")) || {};
-  const budget = settings.budget || "Not set";
+  const budget = settings.budget || "未设置";
   const currency = settings.currency || "INR";
 
   const display = document.getElementById("budget-display");
   if (display) {
-    display.textContent = `🎯 Monthly Budget: ${currency} ${budget}`;
+    display.textContent = `🎯 月度预算： ${currency} ${budget}`;
   }
 }
 
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Save settings
-function saveSettings() {
+function save设置() {
   const budget = document.getElementById("budget")?.value;
   const currency = document.getElementById("currency")?.value;
   const theme = document.getElementById("theme")?.value;
@@ -41,7 +41,7 @@ function saveSettings() {
   localStorage.setItem("settings", JSON.stringify(settings));
 
   applyTheme();
-  showToast("✅ Settings Saved!");
+  showToast("✅ 设置 Saved!");
 }
 
 // Apply theme
@@ -57,10 +57,10 @@ function applyTheme() {
 
 // Reset all data
 function resetData() {
-  if (confirm("Are you sure you want to delete all data?")) {
+  if (confirm("确定要清空所有账单和设置吗？")) {
     localStorage.removeItem("expenses");
     localStorage.removeItem("settings");
-    showToast("🗑️ All data reset!");
+    showToast("🗑️ 已清空全部数据！");
   }
 }
 
@@ -68,7 +68,7 @@ function resetData() {
 function exportAllExpenses() {
   const expenses = JSON.parse(localStorage.getItem("expenses")) || [];
   if (expenses.length === 0) {
-    showToast("⚠️ No expenses to export.");
+    showToast("⚠️ 暂无账单可导出。");
     return;
   }
 
@@ -76,7 +76,7 @@ function exportAllExpenses() {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = "all-expenses.json";
+  a.download = "全部账单.json";
   a.click();
   URL.revokeObjectURL(url);
 }
@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const expense = { desc, amount, category, date };
       saveExpense(expense);
       form.reset();
-      alert("Expense added!");
+      alert("账单已添加！");
     });
   }
 
