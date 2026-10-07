@@ -269,3 +269,7 @@ body.dark input, body.dark select { border-color: #3b426b; background: #202642; 
   .expense-card { align-items: flex-start; flex-wrap: wrap; }
   .expense-card .amount { margin-left: auto; }
 }
+
+/* ===== Brand logo ===== */
+nav .brand { display: inline-flex; align-items: center; gap: 10px; }
+nav .brand img { display: block; width: 34px; height: 34px; object-fit: contain; border-radius: 10px; }
