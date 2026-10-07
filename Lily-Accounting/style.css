@@ -273,3 +273,5 @@ body.dark input, body.dark select { border-color: #3b426b; background: #202642; 
 /* ===== Brand logo ===== */
 nav .brand { display: inline-flex; align-items: center; gap: 10px; }
 nav .brand img { display: block; width: 34px; height: 34px; object-fit: contain; border-radius: 10px; }
+
+.auth-page{display:grid;place-items:center;padding-top:40px}.auth-card{width:min(100%,430px);padding:34px;border:1px solid rgba(255,255,255,.9);border-radius:24px;background:var(--surface);box-shadow:var(--shadow)}.auth-card h1{margin:18px 0 8px;font-size:30px}.auth-logo{display:block;width:76px;height:76px;margin:0 auto;object-fit:contain;border-radius:20px}.auth-subtitle{text-align:center;color:var(--muted);margin-bottom:24px}.auth-actions{display:grid;gap:10px;margin-top:8px}.secondary-btn{color:var(--primary);background:#eef0ff}.auth-status{min-height:22px;margin-top:12px;text-align:center;color:#168a65;font-size:14px}.auth-status.error{color:#df5968}.empty-state{text-align:center;color:var(--muted);padding:24px}
