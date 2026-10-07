@@ -15,18 +15,18 @@ function deleteExpense(index) {
   location.reload(); // Refresh to update UI
 }
 
-function saveSettings() {
+function save设置() {
   const budget = document.getElementById("budget").value;
   const currency = document.getElementById("currency").value;
   const theme = document.getElementById("theme").value;
 
   const settings = { budget, currency, theme };
   localStorage.setItem("settings", JSON.stringify(settings));
-  alert("Settings saved!");
+  alert("设置 saved!");
 }
 
 // Load and process expenses
-function loadAnalytics() {
+function load数据分析() {
   const expenses = getExpenses();
   const currentMonth = new Date().getMonth(); // 0 = Jan, 1 = Feb, etc.
 
@@ -67,7 +67,7 @@ function loadAnalytics() {
     data: {
       labels: Object.keys(dailyTotals),
       datasets: [{
-        label: 'Daily Spending',
+        label: '每日支出',
         data: Object.values(dailyTotals),
         borderColor: '#4a90e2',
         backgroundColor: 'rgba(74,144,226,0.2)',
@@ -92,7 +92,7 @@ function loadAnalytics() {
     listContainer.appendChild(card);
   });
 
-  document.getElementById('total-spent').innerText = `🧾 Total Spent This Month: ₹${total}`;
+  document.getElementById('total-spent').innerText = `🧾 本月总支出：₹${total}`;
 }
 
 // Download JSON file
@@ -105,10 +105,10 @@ function downloadMonthlyJSON() {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'monthly-expenses.json';
+  a.download = '本月账单.json';
   a.click();
   URL.revokeObjectURL(url);
 }
 
 // Run on page load
-document.addEventListener('DOMContentLoaded', loadAnalytics);
+document.addEventListener('DOMContentLoaded', load数据分析);
