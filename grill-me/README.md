@@ -1,4 +1,4 @@
-# Grill Me · Expense Tracker
+# Lily Accounting
 
 A static personal expense tracker deployed on GitHub Pages.
 
