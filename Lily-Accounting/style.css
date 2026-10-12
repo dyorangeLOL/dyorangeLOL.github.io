@@ -339,3 +339,44 @@ body.theme-lavender .settings-card,
 body.theme-lavender .expense-card,
 body.theme-lavender .chart-card { background: var(--surface); border-color: var(--line); }
 body.theme-lavender .card-container a.card::before { background: #f1e7ff; }
+
+/* GitHub dark; retain midnight preset for existing users. */
+body.theme-github-dark {
+  --ink: #f0f6fc;
+  --muted: #8b949e;
+  --primary: #58a6ff;
+  --primary-dark: #1f6feb;
+  --surface: rgba(22,27,34,.94);
+  --line: #30363d;
+  --shadow: 0 18px 50px rgba(0,0,0,.30);
+  background: #0d1117;
+}
+body.theme-github-dark nav,
+body.theme-github-dark .card-container a.card,
+body.theme-github-dark .glass-form,
+body.theme-github-dark .settings-card,
+body.theme-github-dark .expense-card,
+body.theme-github-dark .chart-card,
+body.theme-github-dark .stat-card,
+body.theme-github-dark .period-tabs button { background: var(--surface); border-color: var(--line); }
+body.theme-github-dark input,
+body.theme-github-dark select { color: var(--ink); background: #0d1117; border-color: var(--line); }
+body.theme-github-dark nav a { color: var(--muted); }
+body.theme-github-dark nav a:hover, body.theme-github-dark nav a:focus { color: var(--ink); background: #21262d; }
+
+
+body.theme-github{color-scheme:light;--theme-soft:#ddf4ff;}
+body.theme-github-dark{color-scheme:dark;--theme-soft:#21262d;}
+body.theme-github .stat-card,body.theme-github .period-tabs button,
+body.theme-github .auth-card,body.theme-github-dark .auth-card{background:var(--surface);border-color:var(--line);}
+body.theme-github-dark .budget-bar,body.theme-github-dark .secondary-btn,
+body.theme-github-dark .card-container a.card::before{background:var(--theme-soft);color:var(--primary);}
+body.theme-github .budget-bar,body.theme-github .secondary-btn{background:var(--theme-soft);color:var(--primary);}
+body.theme-github button:not(.calendar-day):not(.danger):not(.secondary-btn):not(.period-tabs button),
+body.theme-github-dark button:not(.calendar-day):not(.danger):not(.secondary-btn):not(.period-tabs button){background:#238636;color:#fff;}
+body.theme-github-dark .period-tabs button.active,
+body.theme-github .period-tabs button.active{background:var(--primary);color:#fff;}
+body.theme-github-dark input::placeholder{color:var(--muted);}
+body.theme-github-dark .expense-card .amount,body.theme-github-dark .income-card .amount{color:#3fb950!important;}
+body.theme-github-dark .expense-card .delete{color:#ff7b72;}
+body.theme-github-dark .card-container a.card:hover{border-color:var(--primary);}
