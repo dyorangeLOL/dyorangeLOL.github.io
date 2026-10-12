@@ -60,11 +60,13 @@
     <button onclick="save设置()" class="animated-btn">💾 Save 设置</button>
     <button onclick="resetData()" class="animated-btn danger">🗑️ 清空全部数据</button>
     <button onclick="exportAllExpenses()" class="animated-btn">⬇️ 导出全部账单</button>
+    <button onclick="cleanupDuplicateRecords()" class="animated-btn">🧹 清理重复账单</button>
   </div>
 
   <div id="toast" class="toast">✅ 设置 Saved!</div>
 
   <footer class="footer">© Lily Accounting</footer>
+  <script>async function cleanupDuplicateRecords(){if(!confirm("仅删除字段完全相同且在60秒内重复生成的账单，并保留最早的一条。确定继续吗？"))return;try{const r=await cleanupDuplicateExpenses();showToast(r.count?`✅ 已清理 ${r.count} 条重复账单。`:"✅ 未发现符合条件的重复账单。");}catch(e){console.error(e);showToast("清理失败，请稍后重试。");}}</script>
 </body>
 </html>
 
