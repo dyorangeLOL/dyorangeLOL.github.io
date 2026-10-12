@@ -276,3 +276,66 @@ nav .brand img { display: block; width: 34px; height: 34px; object-fit: contain;
 
 .auth-page{display:grid;place-items:center;padding-top:40px}.auth-card{width:min(100%,430px);padding:34px;border:1px solid rgba(255,255,255,.9);border-radius:24px;background:var(--surface);box-shadow:var(--shadow)}.auth-card h1{margin:18px 0 8px;font-size:30px}.auth-logo{display:block;width:76px;height:76px;margin:0 auto;object-fit:contain;border-radius:20px}.auth-subtitle{text-align:center;color:var(--muted);margin-bottom:24px}.auth-actions{display:grid;gap:10px;margin-top:8px}.secondary-btn{color:var(--primary);background:#eef0ff}.auth-status{min-height:22px;margin-top:12px;text-align:center;color:#168a65;font-size:14px}.auth-status.error{color:#df5968}.empty-state{text-align:center;color:var(--muted);padding:24px}
 .stats-grid{width:min(100%,960px);margin:0 auto 20px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.stat-card{padding:18px 20px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.9);box-shadow:var(--shadow)}.stat-card span{display:block;color:var(--muted);font-size:14px}.stat-card strong{display:block;margin-top:8px;color:var(--ink);font-size:25px}.period-tabs{width:min(100%,480px);margin:0 auto 12px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.period-tabs button{color:var(--muted);background:rgba(255,255,255,.85);border:1px solid var(--line)}.period-tabs button.active{color:#fff;background:var(--primary)}.period-summary{text-align:center;color:var(--muted);margin:10px auto 22px}.income-card .amount{color:#168a65!important}body.dark .stat-card,body.dark .period-tabs button{background:var(--surface);border-color:var(--line)}@media(max-width:600px){.stats-grid{grid-template-columns:1fr}.stat-card{display:flex;align-items:center;justify-content:space-between}.stat-card strong{margin-top:0;font-size:21px}}
+/* ===== Theme presets ===== */
+body.theme-github {
+  --ink: #1f2328;
+  --muted: #656d76;
+  --primary: #0969da;
+  --primary-dark: #0550ae;
+  --surface: rgba(255,255,255,.94);
+  --line: #d0d7de;
+  --shadow: 0 12px 32px rgba(31,35,40,.10);
+  background: #f6f8fa;
+}
+body.theme-github nav,
+body.theme-github .card-container a.card,
+body.theme-github .glass-form,
+body.theme-github .settings-card,
+body.theme-github .expense-card,
+body.theme-github .chart-card { background: var(--surface); border-color: var(--line); }
+body.theme-github nav a:hover, body.theme-github nav a:focus { color: var(--primary); background: #ddf4ff; }
+body.theme-github .card-container a.card::before { background: #ddf4ff; }
+
+body.theme-midnight {
+  --ink: #f0f6fc;
+  --muted: #8b949e;
+  --primary: #58a6ff;
+  --primary-dark: #1f6feb;
+  --surface: rgba(22,27,34,.94);
+  --line: #30363d;
+  --shadow: 0 18px 50px rgba(0,0,0,.30);
+  background: #0d1117;
+}
+body.theme-midnight nav,
+body.theme-midnight .card-container a.card,
+body.theme-midnight .glass-form,
+body.theme-midnight .settings-card,
+body.theme-midnight .expense-card,
+body.theme-midnight .chart-card,
+body.theme-midnight .stat-card,
+body.theme-midnight .period-tabs button { background: var(--surface); border-color: var(--line); }
+body.theme-midnight input,
+body.theme-midnight select { color: var(--ink); background: #0d1117; border-color: var(--line); }
+body.theme-midnight nav a { color: var(--muted); }
+body.theme-midnight nav a:hover, body.theme-midnight nav a:focus { color: var(--ink); background: #21262d; }
+
+body.theme-lavender {
+  --ink: #33264d;
+  --muted: #806f99;
+  --primary: #9b72cf;
+  --primary-dark: #7547aa;
+  --surface: rgba(255,250,255,.90);
+  --line: #eadcf4;
+  --shadow: 0 18px 50px rgba(126,83,160,.16);
+  background:
+    radial-gradient(circle at 8% 0%, rgba(214,185,255,.38), transparent 35%),
+    radial-gradient(circle at 95% 8%, rgba(255,206,232,.36), transparent 30%),
+    #fbf7ff;
+}
+body.theme-lavender nav,
+body.theme-lavender .card-container a.card,
+body.theme-lavender .glass-form,
+body.theme-lavender .settings-card,
+body.theme-lavender .expense-card,
+body.theme-lavender .chart-card { background: var(--surface); border-color: var(--line); }
+body.theme-lavender .card-container a.card::before { background: #f1e7ff; }
