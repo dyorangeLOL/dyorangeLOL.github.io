@@ -34,8 +34,8 @@ document.addEventListener("DOMContentLoaded",async()=>{
  try{
   const user=await requireAuth();if(!user)return;
   const settings=await loadSettings();calendarCurrency=["CNY","SGD","HKD","USD","JPY"].includes(settings.currency)?settings.currency:"CNY";
-  const theme=["light","dark","github","midnight","lavender"].includes(settings.theme)?settings.theme:"light";
-  document.body.classList.remove("theme-light","theme-dark","theme-github","theme-midnight","theme-lavender");document.body.classList.add("theme-"+theme);document.body.classList.toggle("dark",theme==="dark"||theme==="midnight");try{localStorage.setItem("lily-theme",theme);}catch(e){}
+  const theme=["light","dark","github","github-dark","midnight","lavender"].includes(settings.theme)?settings.theme:"light";
+  document.body.classList.remove("theme-light","theme-dark","theme-github","theme-github-dark","theme-midnight","theme-lavender");document.body.classList.add("theme-"+theme);document.body.classList.toggle("dark",theme==="dark"||theme==="midnight"||theme==="github-dark");try{localStorage.setItem("lily-theme",theme);}catch(e){}
   for(let start=0;;start+=1000){
    const {data,error}=await supabaseClient.from("expenses").select("id,description,amount,category,date,type").eq("user_id",user.id).order("date").order("id").range(start,start+999);
    if(error)throw error;calendarRows.push(...(data||[]));if(!data||data.length<1000)break;
