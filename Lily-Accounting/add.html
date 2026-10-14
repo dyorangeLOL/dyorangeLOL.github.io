@@ -5,43 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/png" href="logo.png" />
   <title>Lily Accounting - 记一笔</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=20261014-icons" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="auth.js" defer></script>
-  <script src="data.js" defer></script>
-  <script src="script.js" defer></script>
+  <script src="icons.js?v=20261014-icons" defer></script><script src="auth.js" defer></script>
+  <script src="data.js?v=20261014-icons" defer></script>
+  <script src="script.js?v=20261014-icons" defer></script>
 
 </head>
 <body class="add-page"><script>(function(){var t=localStorage.getItem("lily-theme");if(["light","dark","github","github-dark","midnight","lavender"].includes(t)){document.body.classList.add("theme-"+t);if(t==="dark"||t==="midnight"||t==="github-dark")document.body.classList.add("dark");}})();</script>
   <nav>
     <div class="brand"><img src="logo.png" alt="Lily Accounting logo" />Lily Accounting</div>
     <div>
-      <a href="index.html">首页</a>
-      <a href="add.html">记一笔</a>
-      <a href="history.html">账单记录</a>
-      <a href="analytics.html">数据分析</a>
-      <a href="settings.html">设置</a>
-    <a href="auth.html" id="auth-link">登录</a>
+      <a href="index.html"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-home"></use></svg> 首页</a>
+      <a href="add.html" aria-current="page"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-add"></use></svg> 记一笔</a>
+      <a href="history.html"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-history"></use></svg> 账单记录</a>
+      <a href="analytics.html"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-analytics"></use></svg> 数据分析</a>
+      <a href="settings.html"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-settings"></use></svg> 设置</a>
+    <a href="auth.html" id="auth-link"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-login"></use></svg> 登录</a>
     </div>
   </nav>
 
-  <h1 class="page-title">➕ 新增账单</h1>
+  <h1 class="page-title"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-add"></use></svg> 新增账单</h1>
 
   <div class="glass-form">
     <form id="expense-form">
       <div class="input-group">
-        <label for="desc">📝 账单备注</label>
+        <label for="desc"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-note"></use></svg> 账单备注</label>
         <input type="text" id="desc" placeholder="例如：超市购物" required />
       </div>
 
       <div class="input-group">
-        <label for="amount">💰 金额</label>
+        <label for="amount"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-amount"></use></svg> 金额</label>
         <input type="number" id="amount" placeholder="例如：1200.50" min="0" step="0.01" inputmode="decimal" required />
       </div>
 
       <div class="input-group">
-        <label for="type">🔄 类型</label>
+        <label for="type"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-transfer"></use></svg> 类型</label>
         <select id="type" required>
           <option value="expense">支出</option>
           <option value="income">收入</option>
@@ -49,27 +49,27 @@
       </div>
 
       <div class="input-group">
-        <label for="category">📂 分类</label>
+        <label for="category"><svg id="category-icon" class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-category"></use></svg> 分类</label>
         <select id="category" required>
           <option value="">请选择分类</option>
-          <option value="餐饮">🍔 餐饮</option>
-          <option value="交通">🚌 交通</option>
-          <option value="学习">🎓 学习</option>
-          <option value="数码">💻 数码</option>
-          <option value="购物">🛍️ 购物</option>
-          <option value="娱乐">🎮 娱乐</option>
-          <option value="医疗">🏥 医疗</option>
-          <option value="生活">💡 生活</option>
-          <option value="其他">📦 其他</option>
+          <option value="餐饮">餐饮</option>
+          <option value="交通">交通</option>
+          <option value="学习">学习</option>
+          <option value="数码">数码</option>
+          <option value="购物">购物</option>
+          <option value="娱乐">娱乐</option>
+          <option value="医疗">医疗</option>
+          <option value="生活">生活</option>
+          <option value="其他">其他</option>
         </select>
       </div>
 
       <div class="input-group">
-        <label for="date">📅 账单日期（保存时间精确到秒）</label>
+        <label for="date"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-calendar"></use></svg> 账单日期（保存时间精确到秒）</label>
         <input type="date" id="date" required />
       </div>
 
-      <button type="submit" class="animated-btn">记一笔</button>
+      <button type="submit" class="animated-btn"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-add"></use></svg> 记一笔</button>
     </form>
   </div>
 

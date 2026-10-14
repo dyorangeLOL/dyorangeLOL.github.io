@@ -9,7 +9,7 @@ function showCalendarDay(key){
  const list=document.getElementById("day-expenses");list.replaceChildren();
  const rows=calendarRows.filter(row=>row.date===key&&row.type!=="income");
  if(!rows.length){const p=document.createElement("p");p.className="empty-state";p.textContent="当天暂无支出";list.append(p);}
- for(const row of rows){const card=document.createElement("div");card.className="expense-card";const desc=document.createElement("span");desc.textContent=row.description+"（"+normalizeCategory(row.category)+"）";const amount=document.createElement("span");amount.className="amount";amount.textContent=calendarMoney(Math.round(Number(row.amount)*100));card.append(desc,amount);list.append(card);}
+ for(const row of rows){const card=document.createElement("div");card.className="expense-card";const desc=document.createElement("span");desc.className="expense-info";desc.textContent=row.description+"（"+normalizeCategory(row.category)+"）";const amount=document.createElement("span");amount.className="amount";amount.textContent=calendarMoney(Math.round(Number(row.amount)*100));card.append(LilyIcons.create(LilyIcons.category(normalizeCategory(row.category)),"expense-category-icon"),desc,amount);list.append(card);}
  for(const cell of document.querySelectorAll(".calendar-day")){const active=cell.dataset.date===key;cell.classList.toggle("selected",active);cell.setAttribute("aria-pressed",String(active));}
 }
 function drawCalendar(){

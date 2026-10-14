@@ -97,20 +97,6 @@ h1, .page-title {
   border-color: #cdd0ff;
   box-shadow: 0 22px 45px rgba(74, 78, 170, .2);
 }
-.card img { display: none; }
-.card-container a.card::before {
-  display: grid;
-  width: 66px;
-  height: 66px;
-  place-items: center;
-  border-radius: 20px;
-  font-size: 32px;
-  background: #eef0ff;
-}
-.card-container a.card:nth-child(1)::before { content: "✍️"; }
-.card-container a.card:nth-child(2)::before { content: "🧾"; }
-.card-container a.card:nth-child(3)::before { content: "📊"; }
-.card-container a.card:nth-child(4)::before { content: "⚙️"; }
 .card h3 { font-size: 17px; }
 .budget-bar {
   max-width: 420px;
@@ -265,7 +251,7 @@ body.dark input, body.dark select { border-color: #3b426b; background: #202642; 
   h1, .page-title { margin: 40px auto 24px; font-size: 31px; }
   .card-container { gap: 12px; }
   .card-container a.card { min-height: 160px; padding: 20px 10px; }
-  .card-container a.card::before { width: 54px; height: 54px; font-size: 26px; }
+  .card-container a.card .card-icon { width: 54px; height: 54px; font-size: 26px; }
   .expense-card { align-items: flex-start; flex-wrap: wrap; }
   .expense-card .amount { margin-left: auto; }
 }
@@ -294,7 +280,7 @@ body.theme-github .settings-card,
 body.theme-github .expense-card,
 body.theme-github .chart-card { background: var(--surface); border-color: var(--line); }
 body.theme-github nav a:hover, body.theme-github nav a:focus { color: var(--primary); background: #ddf4ff; }
-body.theme-github .card-container a.card::before { background: #ddf4ff; }
+body.theme-github .card-container a.card .card-icon { background: #ddf4ff; }
 
 body.theme-midnight {
   --ink: #f0f6fc;
@@ -338,7 +324,7 @@ body.theme-lavender .glass-form,
 body.theme-lavender .settings-card,
 body.theme-lavender .expense-card,
 body.theme-lavender .chart-card { background: var(--surface); border-color: var(--line); }
-body.theme-lavender .card-container a.card::before { background: #f1e7ff; }
+body.theme-lavender .card-container a.card .card-icon { background: #f1e7ff; }
 
 /* GitHub dark; retain midnight preset for existing users. */
 body.theme-github-dark {
@@ -370,13 +356,50 @@ body.theme-github-dark{color-scheme:dark;--theme-soft:#21262d;}
 body.theme-github .stat-card,body.theme-github .period-tabs button,
 body.theme-github .auth-card,body.theme-github-dark .auth-card{background:var(--surface);border-color:var(--line);}
 body.theme-github-dark .budget-bar,body.theme-github-dark .secondary-btn,
-body.theme-github-dark .card-container a.card::before{background:var(--theme-soft);color:var(--primary);}
+body.theme-github-dark .card-container a.card .card-icon{background:var(--theme-soft);color:var(--primary);}
 body.theme-github .budget-bar,body.theme-github .secondary-btn{background:var(--theme-soft);color:var(--primary);}
-body.theme-github button:not(.calendar-day):not(.danger):not(.secondary-btn):not(.period-tabs button),
-body.theme-github-dark button:not(.calendar-day):not(.danger):not(.secondary-btn):not(.period-tabs button){background:#238636;color:#fff;}
+body.theme-github button:not(.calendar-day):not(.danger):not(.delete):not(.secondary-btn):not(.period-tabs button),
+body.theme-github-dark button:not(.calendar-day):not(.danger):not(.delete):not(.secondary-btn):not(.period-tabs button){background:#238636;color:#fff;}
 body.theme-github-dark .period-tabs button.active,
 body.theme-github .period-tabs button.active{background:var(--primary);color:#fff;}
 body.theme-github-dark input::placeholder{color:var(--muted);}
 body.theme-github-dark .expense-card .amount,body.theme-github-dark .income-card .amount{color:#3fb950!important;}
 body.theme-github-dark .expense-card .delete{color:#ff7b72;}
 body.theme-github-dark .card-container a.card:hover{border-color:var(--primary);}
+
+/* Flat SVG icon system */
+.lily-icon { display: inline-block; width: 24px; height: 24px; flex: 0 0 auto; fill: currentColor; vertical-align: -.2em; }
+nav a { display: inline-flex; align-items: center; gap: 6px; }
+nav a .lily-icon { width: 18px; height: 18px; }
+nav a[aria-current="page"] { color: var(--primary); background: var(--theme-soft, #eef0ff); }
+nav a:focus-visible, button:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
+h1 > .lily-icon, .page-title > .lily-icon { width: .85em; height: .85em; margin-right: .15em; }
+.input-group label { display: inline-flex; align-items: center; gap: 7px; }
+.input-group label .lily-icon { width: 18px; height: 18px; color: var(--primary); }
+.card-icon { display: grid; width: 66px; height: 66px; place-items: center; color: var(--primary); background: var(--theme-soft, #eef0ff); border-radius: 20px; }
+.card-icon .lily-icon { width: 34px; height: 34px; }
+.animated-btn, .auth-actions button, .calendar-toolbar button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+button > .lily-icon { width: 20px; height: 20px; }
+.search-bar { position: relative; }
+.search-bar > .lily-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+.search-bar input { padding-left: 48px; }
+.budget-bar { display: flex; justify-content: center; align-items: center; gap: 8px; }
+.stat-card .stat-label { display: flex; align-items: center; gap: 7px; }
+.stat-label .lily-icon, .chart-card h3 .lily-icon, .calendar-detail h2 .lily-icon { width: 20px; height: 20px; }
+.expense-category-icon { color: var(--primary); }
+.expense-info { flex: 1; min-width: 0; line-height: 1.5; overflow-wrap: anywhere; }
+.expense-card button.delete { display: inline-flex; align-items: center; justify-content: center; gap: 4px; width: auto; min-height: 36px; padding: 6px 8px; background: transparent; font-size: 13px; box-shadow: none; }
+.expense-card button.delete:hover { transform: none; background: transparent; text-decoration: underline; }
+.expense-card button.delete .lily-icon { width: 16px; height: 16px; }
+.toast { display: flex; align-items: center; gap: 8px; }
+body.theme-dark .card-icon { background: #30365b; color: #b8b9ff; }
+body.theme-dark .expense-category-icon, body.theme-dark .input-group label .lily-icon { color: #b8b9ff; }
+body.theme-dark nav a[aria-current="page"] { background: #30365b; color: #b8b9ff; }
+body.theme-midnight .card-icon { background: #21262d; }
+@media(max-width:480px) {
+  .card-icon { width: 54px; height: 54px; border-radius: 16px; }
+  .card-icon .lily-icon { width: 28px; height: 28px; }
+  nav a .lily-icon { width: 16px; height: 16px; }
+  .expense-info { flex-basis: calc(100% - 40px); }
+}
+@media(prefers-reduced-motion:reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }

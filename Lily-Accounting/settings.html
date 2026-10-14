@@ -5,42 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/png" href="logo.png" />
   <title>设置</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=20261014-icons" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="auth.js" defer></script>
-  <script src="data.js" defer></script>
-  <script src="script.js" defer></script>
+  <script src="icons.js?v=20261014-icons" defer></script><script src="auth.js" defer></script>
+  <script src="data.js?v=20261014-icons" defer></script>
+  <script src="script.js?v=20261014-icons" defer></script>
 
 </head>
 <body class="settings-page"><script>(function(){var t=localStorage.getItem("lily-theme");if(["light","dark","github","github-dark","midnight","lavender"].includes(t)){document.body.classList.add("theme-"+t);if(t==="dark"||t==="midnight"||t==="github-dark")document.body.classList.add("dark");}})();</script>
   <nav>
     <div class="brand"><img src="logo.png" alt="Lily Accounting logo" />Lily Accounting</div>
     <div>
-      <a href="index.html">首页</a>
-      <a href="add.html">记一笔</a>
-      <a href="history.html">账单记录</a>
-      <a href="analytics.html">数据分析</a>
-      <a href="settings.html">设置</a>
-    <a href="auth.html" id="auth-link">登录</a>
+      <a href="index.html"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-home"></use></svg> 首页</a>
+      <a href="add.html"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-add"></use></svg> 记一笔</a>
+      <a href="history.html"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-history"></use></svg> 账单记录</a>
+      <a href="analytics.html"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-analytics"></use></svg> 数据分析</a>
+      <a href="settings.html" aria-current="page"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-settings"></use></svg> 设置</a>
+    <a href="auth.html" id="auth-link"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-login"></use></svg> 登录</a>
     </div>
   </nav>
 
-  <h1 class="page-title">⚙️ 设置</h1>
+  <h1 class="page-title"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-settings"></use></svg> 设置</h1>
 
   <div class="settings-card">
     <div class="input-group">
-      <label for="initial-funds">初始资金</label>
+      <label for="initial-funds"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-wallet"></use></svg> 初始资金</label>
       <input type="number" id="initial-funds" min="0" step="0.01" placeholder="例如：10000" />
     </div>
 
     <div class="input-group">
-      <label for="budget">月度预算</label>
+      <label for="budget"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-budget"></use></svg> 月度预算</label>
       <input type="number" id="budget" placeholder="输入月度预算" />
     </div>
 
     <div class="input-group">
-      <label for="currency">货币</label>
+      <label for="currency"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-amount"></use></svg> 货币</label>
       <select id="currency">
         <option value="CNY">¥ CNY</option>
         <option value="SGD">S$ SGD</option>
@@ -51,7 +51,7 @@
     </div>
 
     <div class="input-group">
-      <label for="theme">外观</label>
+      <label for="theme"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-theme"></use></svg> 外观</label>
       <select id="theme">
         <option value="light">浅色</option>
         <option value="dark">深色</option>
@@ -62,16 +62,16 @@
       </select>
     </div>
 
-    <button onclick="save设置()" class="animated-btn">💾 Save 设置</button>
-    <button onclick="resetData()" class="animated-btn danger">🗑️ 清空全部数据</button>
-    <button onclick="exportAllExpenses()" class="animated-btn">⬇️ 导出全部账单</button>
-    <button onclick="cleanupDuplicateRecords()" class="animated-btn">🧹 清理重复账单</button>
+    <button onclick="save设置()" class="animated-btn"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-save"></use></svg> 保存设置</button>
+    <button onclick="resetData()" class="animated-btn danger"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-delete"></use></svg> 清空全部数据</button>
+    <button onclick="exportAllExpenses()" class="animated-btn"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-export"></use></svg> 导出全部账单</button>
+    <button onclick="cleanupDuplicateRecords()" class="animated-btn"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-cleanup"></use></svg> 清理重复账单</button>
   </div>
 
-  <div id="toast" class="toast">✅ 设置 Saved!</div>
+  <div id="toast" class="toast" role="status" aria-live="polite"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-check"></use></svg> <span>设置已保存</span></div>
 
   <footer class="footer">© Lily Accounting</footer>
-  <script>async function cleanupDuplicateRecords(){if(!confirm("仅删除字段完全相同且在60秒内重复生成的账单，并保留最早的一条。确定继续吗？"))return;try{const r=await cleanupDuplicateExpenses();showToast(r.count?`✅ 已清理 ${r.count} 条重复账单。`:"✅ 未发现符合条件的重复账单。");}catch(e){console.error(e);showToast("清理失败，请稍后重试。");}}</script>
+  <script>async function cleanupDuplicateRecords(){if(!confirm("仅删除字段完全相同且在60秒内重复生成的账单，并保留最早的一条。确定继续吗？"))return;try{const r=await cleanupDuplicateExpenses();showToast(r.count?`已清理 ${r.count} 条重复账单。`:"未发现符合条件的重复账单。");}catch(e){console.error(e);showToast("清理失败，请稍后重试。");}}</script>
 </body>
 </html>
 

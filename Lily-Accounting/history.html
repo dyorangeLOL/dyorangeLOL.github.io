@@ -5,31 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/png" href="logo.png" />
   <title>Expense 账单记录</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=20261014-icons" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="auth.js" defer></script>
-  <script src="data.js" defer></script>
-  <script src="script.js" defer></script>
+  <script src="icons.js?v=20261014-icons" defer></script><script src="auth.js" defer></script>
+  <script src="data.js?v=20261014-icons" defer></script>
+  <script src="script.js?v=20261014-icons" defer></script>
 
 </head>
 <body class="history-page"><script>(function(){var t=localStorage.getItem("lily-theme");if(["light","dark","github","github-dark","midnight","lavender"].includes(t)){document.body.classList.add("theme-"+t);if(t==="dark"||t==="midnight"||t==="github-dark")document.body.classList.add("dark");}})();</script>
    <nav>
   <div class="brand"><img src="logo.png" alt="Lily Accounting logo" />Lily Accounting</div>
   <div>
-    <a href="index.html">首页</a>
-    <a href="add.html">记一笔</a>
-    <a href="history.html">账单记录</a>
-    <a href="analytics.html">数据分析</a>
-    <a href="settings.html">设置</a>
-    <a href="auth.html" id="auth-link">登录</a>
+    <a href="index.html"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-home"></use></svg> 首页</a>
+    <a href="add.html"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-add"></use></svg> 记一笔</a>
+    <a href="history.html" aria-current="page"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-history"></use></svg> 账单记录</a>
+    <a href="analytics.html"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-analytics"></use></svg> 数据分析</a>
+    <a href="settings.html"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-settings"></use></svg> 设置</a>
+    <a href="auth.html" id="auth-link"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-login"></use></svg> 登录</a>
   </div>
 </nav>
 
-  <h1 class="page-title">📜 Expense 账单记录</h1>
+  <h1 class="page-title"><svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-history"></use></svg> Expense 账单记录</h1>
 
   <div class="search-bar">
-    <input type="text" id="search" placeholder="🔍 搜索账单备注…" />
+    <svg class="lily-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="assets/icons/lily-icons.svg?v=20261014-icons#icon-search"></use></svg>
+    <input type="text" id="search" aria-label="搜索账单备注" placeholder="搜索账单备注…" />
   </div>
 
   <div class="expense-list" id="history-list">
