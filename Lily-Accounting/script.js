@@ -1,56 +1,24 @@
-async function applyTheme(){const s=await loadSettings(),t=["light","dark","github","github-dark","midnight","lavender"].includes(s.theme)?s.theme:"light";localStorage.setItem("lily-theme",t);document.body.classList.remove("theme-light","theme-dark","theme-github","theme-github-dark","theme-midnight","theme-lavender");document.body.classList.add("theme-"+t);document.body.classList.toggle("dark",t==="dark"||t==="midnight"||t==="github-dark");document.querySelectorAll(".expense-card").forEach(c=>c.classList.toggle("dark",t==="dark"||t==="midnight"||t==="github-dark"));}
-async function showBudget() {
-  const settings = await loadSettings(), display = document.getElementById("budget-display");
-  if (display) LilyIcons.label(display, settings.budget ? `月度预算： ${settings.currency || "CNY"} ${settings.budget}` : "尚未设置月度预算", "budget");
+"use strict";
+async function applyTheme(settings){const s=settings||await loadSettings();LilyUI.setTheme(s.theme);LilyUI.setCurrency(s.currency);}
+let toastTimer;
+function showToast(message){const toast=document.getElementById("toast");if(!toast){LilyUI.status(message,message.includes("失败"));return;}toast.textContent=message;toast.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove("show"),3500);}
+function formatRecordTime(e){const d=new Date(e.createdAt);return !e.createdAt||Number.isNaN(d.getTime())?e.date:d.toLocaleString("zh-CN",{month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hour12:false});}
+function renderExpenses(expenses,container,readOnly=false,searching=false){
+ container.replaceChildren();if(!expenses.length){const p=document.createElement("div");p.className="empty-state";p.textContent=searching?"没有找到符合条件的账单":"还没有账单，从第一笔开始。";if(!searching){const a=document.createElement("a");a.href="add.html";a.className="text-link";a.textContent="记第一笔";p.append(a);}container.append(p);return;}
+ for(const e of expenses){const card=document.createElement("div");card.className="expense-card"+(e.type==="income"?" income-card":"");const info=document.createElement("div");info.className="expense-info";const title=document.createElement("strong");title.textContent=e.desc;const detail=document.createElement("small");detail.textContent=(e.type==="income"?"收入":"支出")+" · "+e.category+" · "+e.date;info.append(title,detail);if(!readOnly){const time=document.createElement("small");time.textContent="记录于 "+formatRecordTime(e);info.append(time);}const amount=document.createElement("span");amount.className="amount";amount.textContent=(e.type==="income"?"+":"−")+LilyUI.money(e.amount);card.append(LilyIcons.create(LilyIcons.category(e.category),"expense-category-icon"),info,amount);if(!readOnly){const remove=document.createElement("button");remove.type="button";remove.className="delete";LilyIcons.label(remove,"删除","delete");remove.setAttribute("aria-label","删除账单："+e.desc);remove.onclick=async()=>{if(!confirm("确定删除这笔账单吗？"))return;remove.disabled=true;try{await deleteExpense(e.id);}catch(error){remove.disabled=false;LilyUI.status("删除失败，记录未移除，请稍后重试。",true);}};card.append(remove);}container.append(card);}
 }
-function formatRecordTime(e){if(!e.createdAt)return e.date;const d=new Date(e.createdAt);return Number.isNaN(d.getTime())?e.date:d.toLocaleString("zh-CN",{year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",second:"2-digit",hour12:false});}
-function showToast(message) {
-  const toast = document.getElementById("toast");
-  if (!toast) return alert(message);
-  const text = document.createElement("span"); text.textContent = message;
-  toast.replaceChildren(LilyIcons.create(message.includes("失败") ? "close" : message.includes("暂无") ? "other" : "check"), text);
-  toast.classList.add("show"); setTimeout(() => toast.classList.remove("show"), 3000);
-}
-function renderExpenses(expenses, container) {
-  container.replaceChildren();
-  if (!expenses.length) { const empty = document.createElement("p"); empty.className = "empty-state"; empty.textContent = "暂无账单记录"; container.append(empty); }
-  expenses.forEach(expense => {
-    const card = document.createElement("div"); card.className = "expense-card " + (expense.type === "income" ? "income-card" : "");
-    const info = document.createElement("span"); info.className = "expense-info";
-    info.append(document.createTextNode(expense.desc + "（" + expense.category + "） · 账单日期：" + expense.date), document.createElement("br"));
-    const time = document.createElement("small"); time.textContent = "记录时间：" + formatRecordTime(expense); info.append(time);
-    const amount = document.createElement("span"); amount.className = "amount"; amount.textContent = (expense.type === "income" ? "+" : "-") + "¥" + expense.amount.toFixed(2);
-    const remove = document.createElement("button"); remove.type = "button"; remove.className = "delete";
-    LilyIcons.label(remove, "删除", "delete"); remove.setAttribute("aria-label", "删除账单：" + expense.desc); remove.onclick = () => deleteExpense(expense.id);
-    card.append(LilyIcons.create(LilyIcons.category(expense.category), "expense-category-icon"), info, amount, remove); container.append(card);
-  });
-}
-document.addEventListener("DOMContentLoaded", async () => {
-  let isSubmitting = false;
-  const user = await requireAuth(); if (!user) return;
-  await applyTheme(); await showBudget();
-  const settings = await loadSettings(), budget = document.getElementById("budget"), initial = document.getElementById("initial-funds"), currency = document.getElementById("currency"), theme = document.getElementById("theme");
-  if (budget && settings.budget != null) budget.value = settings.budget;
-  if (initial && settings.initial_funds != null) initial.value = settings.initial_funds;
-  if (currency && settings.currency) currency.value = settings.currency;
-  if (theme && settings.theme) theme.value = settings.theme;
-  const form = document.getElementById("expense-form");
-  if (form) form.onsubmit = async event => {
-    event.preventDefault(); if (isSubmitting) return; isSubmitting = true;
-    const button = form.querySelector('button[type="submit"]'), original = button ? Array.from(button.childNodes, node => node.cloneNode(true)) : [];
-    if (button) { button.disabled = true; button.textContent = "保存中…"; }
-    try {
-      await saveExpense({desc:document.getElementById("desc").value.trim(),amount:Number(document.getElementById("amount").value),category:document.getElementById("category").value,date:document.getElementById("date").value,type:document.getElementById("type").value});
-      alert("账单已添加！"); location.href = "history.html";
-    } catch (error) {
-      isSubmitting = false; if (button) { button.disabled = false; button.replaceChildren(...original); }
-      alert("保存失败，请稍后重试。"); console.error(error);
-    }
-  };
-  const list = document.getElementById("history-list");
-  if (list) {
-    const expenses = await getExpenses(); renderExpenses(expenses, list);
-    const query = document.getElementById("search");
-    if (query) query.oninput = () => renderExpenses(expenses.filter(expense => expense.desc.toLowerCase().includes(query.value.toLowerCase())), list);
+function showBudget(settings,expense){const amount=Number(settings.budget)||0,display=document.getElementById("budget-display"),progress=document.getElementById("budget-progress"),detail=document.getElementById("budget-detail");if(!display)return;display.textContent=amount>0?LilyUI.money(expense)+" / "+LilyUI.money(amount):"尚未设置月度预算";progress.hidden=amount<=0;if(amount>0){const ratio=expense/amount*100;progress.value=Math.min(100,ratio);progress.setAttribute("aria-valuetext","已使用 "+ratio.toFixed(1)+"%");display.closest(".panel").classList.toggle("over-budget",expense>amount);detail.textContent=expense>amount?"已超出预算 "+LilyUI.money(expense-amount):"还可支出 "+LilyUI.money(amount-expense)+" · 已使用 "+ratio.toFixed(1)+"%";}else detail.textContent="在设置中添加预算，跟踪每月支出。";}
+document.addEventListener("DOMContentLoaded",async()=>{
+ const form=document.getElementById("expense-form"),submit=form?.querySelector('button[type="submit"]');let ready=false,isSubmitting=false;
+ if(submit)submit.disabled=true;
+ if(form){const date=document.getElementById("date"),now=new Date();date.value=now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0")+"-"+String(now.getDate()).padStart(2,"0");form.onsubmit=async event=>{event.preventDefault();if(!ready||isSubmitting)return;const desc=document.getElementById("desc").value.trim(),amount=Number(document.getElementById("amount").value);if(!desc||!Number.isFinite(amount)||amount<=0){LilyUI.status("请填写备注和大于零的金额。",true);return;}isSubmitting=true;const nodes=Array.from(submit.childNodes,n=>n.cloneNode(true));submit.disabled=true;submit.textContent="保存中…";LilyUI.status("");try{await saveExpense({desc,amount,category:document.getElementById("category").value,date:date.value,type:document.getElementById("type").value});location.href="history.html";}catch(error){isSubmitting=false;submit.disabled=false;submit.replaceChildren(...nodes);LilyUI.status("保存失败，请稍后重试；输入内容已保留。",true);}};}
+ try{
+  const user=await requireAuth();if(!user)return;const settings=await loadSettings();await applyTheme(settings);
+  for(const [id,key] of [["budget","budget"],["initial-funds","initial_funds"],["currency","currency"],["theme","theme"]]){const el=document.getElementById(id);if(el&&settings[key]!=null)el.value=settings[key];}
+  ready=true;if(submit)submit.disabled=false;
+  const recent=document.getElementById("recent-list"),list=document.getElementById("history-list");
+  if(recent||list){const expenses=await getExpenses();if(list){const search=document.getElementById("search");const draw=()=>{const q=search.value.trim().toLowerCase(),filtered=expenses.filter(e=>(e.desc||"").toLowerCase().includes(q));renderExpenses(filtered,list,false,!!q);document.getElementById("history-count").textContent=q?"找到 "+filtered.length+" 笔":"共 "+expenses.length+" 笔账单";};search.oninput=draw;draw();}
+   if(recent){const now=new Date(),prefix=now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0"),today=prefix+"-"+String(now.getDate()).padStart(2,"0");const month=expenses.filter(e=>e.date.startsWith(prefix)&&e.date<=today),sum=(rows,type)=>rows.filter(e=>(e.type==="income")===type).reduce((s,e)=>s+LilyUI.cents(e.amount),0);const income=sum(month,true),expense=sum(month,false),balance=LilyUI.cents(settings.initial_funds)+sum(expenses,true)-sum(expenses,false);document.getElementById("home-balance").textContent=LilyUI.money(balance/100);document.getElementById("home-income").textContent=LilyUI.money(income/100);document.getElementById("home-expense").textContent=LilyUI.money(expense/100);document.getElementById("overview-period").textContent=now.getFullYear()+" 年 "+(now.getMonth()+1)+" 月 · 看清每一笔收支";showBudget(settings,expense/100);renderExpenses([...expenses].sort((a,b)=>String(b.createdAt||b.date).localeCompare(String(a.createdAt||a.date))).slice(0,5),recent,true);}
   }
+ }catch(error){LilyUI.status("数据加载失败，请重新加载。未读取的数据不会显示为零。",true,true);for(const id of ["recent-list","history-list"]){const el=document.getElementById(id);if(el){el.replaceChildren();const p=document.createElement("p");p.className="empty-state";p.textContent="账单尚未加载";el.append(p);}}const budget=document.getElementById("budget-display");if(budget)budget.textContent="预算尚未加载";}
 });
